@@ -1,0 +1,4 @@
+name: CustomBlockDrops
+version: '${project.version}'
+main: curtisdh.github.customblockdrops.CustomBlockDrops
+api-version: 1.17
