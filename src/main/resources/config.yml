@@ -1,0 +1,6 @@
+settings:
+  blocks:
+    GRASS_BLOCK:
+      overrideDrop: true
+      itemMaterial: SAND
+      droprate: 3
