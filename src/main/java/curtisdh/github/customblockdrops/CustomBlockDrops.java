@@ -8,12 +8,17 @@ import java.util.Map;
 
 public final class CustomBlockDrops extends JavaPlugin
 {
+    public static CustomBlockDrops Instance;
     onBlockBreakEvent blockBreakEvent = new onBlockBreakEvent();
     @Override
     public void onEnable()
     {
         PrintWithClassName(this, "Starting...");
+        Instance = this;
+        //Events
         getServer().getPluginManager().registerEvents(blockBreakEvent,this);
+        //Commands
+        getCommand("reloadConfig").setExecutor(new onReloadCommand());
         LoadConfig();
         PrintWithClassName(this, "Initialised");
     }

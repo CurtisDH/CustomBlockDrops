@@ -2,3 +2,9 @@ name: CustomBlockDrops
 version: '${project.version}'
 main: curtisdh.github.customblockdrops.CustomBlockDrops
 api-version: 1.17
+
+commands:
+  reloadConfig:
+    description: Reloads the config file for 'CustomBlockDrops'
+    usage: /reloadConfig
+    aliases: [customBlockReload,BlockReload,cbre]
