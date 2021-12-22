@@ -10,6 +10,7 @@ public final class CustomBlockDrops extends JavaPlugin
 {
     public static CustomBlockDrops Instance;
     onBlockBreakEvent blockBreakEvent = new onBlockBreakEvent();
+    onBlockPlaceEvent blockPlaceEvent = new onBlockPlaceEvent();
     @Override
     public void onEnable()
     {
@@ -17,6 +18,7 @@ public final class CustomBlockDrops extends JavaPlugin
         Instance = this;
         //Events
         getServer().getPluginManager().registerEvents(blockBreakEvent,this);
+        getServer().getPluginManager().registerEvents(blockPlaceEvent,this);
         //Commands
         getCommand("reloadConfig").setExecutor(new onReloadCommand());
         LoadConfig();
@@ -38,16 +40,18 @@ public final class CustomBlockDrops extends JavaPlugin
             BlockData data;
             Object droprateObj = getConfig().getConfigurationSection("settings.blocks." + key)
                     .getValues(true).get("droprate");
-
+            Object silkTouchDrop = getConfig().getConfigurationSection("settings.blocks." + key)
+                    .getValues(true).get("silkTouchDrop");
             Object itemMaterial = getConfig().getConfigurationSection("settings.blocks." + key)
                     .getValues(true).get("itemMaterial");
             Object overrideDrop = getConfig().getConfigurationSection("settings.blocks."+ key)
                     .getValues(true).get("overrideDrop");
             boolean overrideDropBool = overrideDrop.toString().equalsIgnoreCase("true");
+            boolean silkTouchDropBool = silkTouchDrop.toString().equalsIgnoreCase("true");
             int dropRate = Integer.parseInt(droprateObj.toString());
             key = key.toUpperCase(Locale.ROOT);
 
-            data = new BlockData(itemMaterial.toString(),dropRate,overrideDropBool);
+            data = new BlockData(itemMaterial.toString(),dropRate,overrideDropBool,silkTouchDropBool);
             PrintWithClassName(this, "Loaded mob: " + key +
                     "materialDrop: " + itemMaterial + " droprate:" + dropRate);
 
